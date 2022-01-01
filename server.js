@@ -1,7 +1,7 @@
+require('dotenv').config({path: __dirname + '/config.env'});
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const dotenv = require("dotenv").config();
 const uploadRouter = require("./routes/uploadRoute");
 
 

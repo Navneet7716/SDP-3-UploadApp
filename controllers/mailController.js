@@ -1,48 +1,52 @@
-// const mailgun = require("mailgun-js");
-// const DOMAIN = 'worldtravelo.live';
-// const mg = mailgun({apiKey: "key-45edccfe8fec6e3308bd81747ee81caf", domain: DOMAIN});
+const mailgun = require("mailgun-js");
+const env = require("./env")
+const DOMAIN = process.env.DOMAIN;
+const mg = mailgun({apiKey: process.env.APIKEY, domain: DOMAIN,  host: process.env.HOST});
 
-// exports.sendEmail = async (req, res) => {
-//     const {recipient, subject, message} = req.body;
+exports.sendEmail = async (req, res) => {
+    const {recipient, subject, message} = req.body;
 
-//     const data = {
-//         from: 'Team Jobbers <me@samples.mailgun.org>',
-//         to: recipient,
-//         subject: subject,
-//         html: `
-//         <!DOCTYPE html>
-//         <html lang="en">
-//         <head>
-//             <meta charset="UTF-8">
-//             <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//         </head>
-//         <body>
-//             <span style="font-size: 1.1rem;">${message}</span>
-//             <br />
-//             <br />
+    console.log(process.env.APIKEY)
 
-//             <span style="font-size: 1rem;">Greetings From, </span>
-//             <br />
-//             <span style="font-size: 1rem ;font-weight: bold;">Team Jobbers</span>
-//             <br />
-//             <img src="https://sdp3jobber.s3.ap-south-1.amazonaws.com/SignUp.png" height="100px" width="100px" alt="JOBBERS"/>
-//         </body>
-//         </html>
-//         `
-//     };
+    const data = {
+        from: 'Team Jobbers <me@samples.mailgun.org>',
+        to: recipient,
+        subject: subject,
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body>
+            <span style="font-size: 1.1rem;">${message}</span>
+            <br />
+            <br />
 
-//    let res1 = await mg.messages().send(data, function (error, body) {
-//         console.log(body);
-//     });
+            <span style="font-size: 1rem;">Greetings From, </span>
+            <br />
+            <span style="font-size: 1rem ;font-weight: bold;">Team Jobbers</span>
+            <br />
+            <img src="https://sdp3jobber.s3.ap-south-1.amazonaws.com/SignUp.png" height="100px" width="100px" alt="JOBBERS"/>
+        </body>
+        </html>
+        `
+    };
 
-//     res.send(res1)
+   let res1 = await mg.messages().send(data, function (error, body) {
+        console.log(" bpod " ,body);
+        console.log(error);
+    });
 
-// }
+    res.send(res1)
 
-const nodemailer = require("nodemailer");
-const pug = require("pug");
-const htmlToText = require("html-to-text");
+}
+
+// const nodemailer = require("nodemailer");
+// const pug = require("pug");
+// const htmlToText = require("html-to-text");
 
 // class Email {
 //   constructor(email, message) {
@@ -87,37 +91,37 @@ const htmlToText = require("html-to-text");
 //   }
 // }
 
-exports.sendEmail = async (req, res) => {
-  const { recipient, subject, message } = req.body;
+// exports.sendEmail = async (req, res) => {
+//   const { recipient, subject, message } = req.body;
 
-  const html = pug.renderFile(`${__dirname}/a.pug`, {
-    message,
-    subject,
-  });
+//   const html = pug.renderFile(`${__dirname}/a.pug`, {
+//     message,
+//     subject,
+//   });
 
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: recipient,
-    subject,
-    html,
-    text: htmlToText.fromString(html),
-  };
-  try {
+//   const mailOptions = {
+//     from: process.env.EMAIL,
+//     to: recipient,
+//     subject,
+//     html,
+//     text: htmlToText.fromString(html),
+//   };
+//   try {
 
       
-      let res1 = await nodemailer
-      .createTransport({
-        service: 'gmail',
-          auth: {
-              user: 'realtorsapi@gmail.com',
-              pass: 'Dhruvrishi123',
-            },
-        })
-        .sendMail(mailOptions);
-        console.log(res1);
-      res.send(res1)
-    }catch (e) {
-        console.log(e);
-        res.send(e)
-    }
-};
+//       let res1 = await nodemailer
+//       .createTransport({
+//         service: 'gmail',
+//           auth: {
+//               user: 'realtorsapi@gmail.com',
+//               pass: 'Dhruvrishi123',
+//             },
+//         })
+//         .sendMail(mailOptions);
+//         console.log(res1);
+//       res.send(res1)
+//     }catch (e) {
+//         console.log(e);
+//         res.send(e)
+//     }
+// };
