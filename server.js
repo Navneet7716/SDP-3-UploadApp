@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.disable("x-powered-by");
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
 app.get("/", (req, res) => {
   res.send("Hello");
