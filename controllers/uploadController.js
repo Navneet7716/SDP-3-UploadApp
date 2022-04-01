@@ -35,7 +35,7 @@ exports.callUpload = async (req, res) => {
     if (!req.file) return next();
     req.body.image = `user-${Date.now()}-post.jpg`;
     let params = {
-      Bucket: "sdp3jobber",
+      Bucket: "jobbersdata",
       Key: req.body.image,
       Body: req.file.buffer,
     };
@@ -79,7 +79,7 @@ exports.callProfileUpload = async (req, res) => {
     if (!req.file) return next();
     req.body.image = `user-${Date.now()}-profile.jpg`;
     let params = {
-      Bucket: "sdp3jobber",
+      Bucket: "jobbersdata",
       Key: req.body.image,
       Body: req.file.buffer,
     };
@@ -121,7 +121,7 @@ exports.callResumeUpload = async (req, res) => {
     if (!req.file) return next();
     req.body.file = `user-${Date.now()}-resume.pdf`;
     let params = {
-      Bucket: "sdp3jobber",
+      Bucket: "jobbersdata",
       Key: req.body.file,
       Body: req.file.buffer,
     };

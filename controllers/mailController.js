@@ -29,7 +29,7 @@ exports.sendEmail = async (req, res) => {
             <br />
             <span style="font-size: 1rem ;font-weight: bold;">Team Jobbers</span>
             <br />
-            <img src="https://sdp3jobber.s3.ap-south-1.amazonaws.com/SignUp.png" height="100px" width="100px" alt="JOBBERS"/>
+            <img src="https://jobbersdata.s3.amazonaws.com/SignUp.png" height="100px" width="100px" alt="JOBBERS"/>
         </body>
         </html>
         `
